@@ -54,6 +54,22 @@ public class
     }
 
     private BinaryNode<T> predecessor(BinaryNode<T> root, T entry){
+      BinaryNode<T> result = null;
+ 
+      if(root != null){
+        int compareResult = root.data.compareTo(entry);
+        if(compareResult == 0){ 
+          result = findLargest(root.left);
+        } else if(compareResult > 0){
+          result = predecessor(root.left, entry);
+        } else { 
+          result = predecessor(root.right, entry);
+          if(result == null){ 
+            result = root;
+          }
+        }
+      }
+      return result;
       // TODO (~18 lines): Write this method's full logic. It's the mirror image
       // of the completed successor(BinaryNode<T>, T) method above - same structure,
       // but with "left"/"right" and "largest"/"smallest" swapped.
@@ -76,7 +92,7 @@ public class
       //          your result variable.
       //   6. Return your result.
 
-      return null; // placeholder - replace with your implementation
+      //return null; // placeholder - replace with your implementation
     }
 
     public T successor(T entry){
@@ -122,6 +138,15 @@ public class
     }
 
     private BinaryNode<T> findSmallest(BinaryNode<T> root){
+        BinaryNode<T> result = null;
+        if(root != null){
+          if(root.left != null){
+            result = findSmallest(root.left);
+          } else {
+            result = root;
+          }
+        }
+        return result;
       // TODO (~8 lines): Write this method's full logic. It's the mirror image
       // of findLargest(...) right above it - same structure, but moving left
       // instead of right.
@@ -134,7 +159,7 @@ public class
       //      so root itself is the smallest - use it as your result.
       //   4. Return your result.
 
-      return null; // placeholder - replace with your implementation
+      //return null; // placeholder - replace with your implementation
     }
 
     private class BinaryNode<T> {
